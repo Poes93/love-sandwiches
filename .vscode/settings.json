@@ -20,5 +20,6 @@
         "terminal.ansiRed": "#BF616A",
         "terminal.ansiWhite": "#C0C5CE",
         "terminal.ansiYellow": "#EBCB8B"
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic"
 }
