@@ -7,6 +7,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
+
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -118,6 +119,18 @@ def calculate_stock_data(data):
     return new_stock_data
 
 
+def get_stock_values(data):
+    headings = SHEET.worksheet("stock").row_values(1)
+    print("make the following numbers of sandwiches for next market:")
+    stock_values = {}
+
+    for heading, stock_value in zip(headings, data):
+        print(f"{heading}: {stock_value}")
+        stock_values[heading] = stock_value
+
+    return stock_values
+
+
 def main():
     """
     Run all program functions
@@ -130,6 +143,7 @@ def main():
     sales_columns = get_last_5_entries_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
+    get_stock_values(stock_data)
 
 
 print("Welcome to Love Sandwiches Data Automation")
